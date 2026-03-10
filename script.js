@@ -1,13 +1,33 @@
 const schedule = [
-    {h: 7, t: "🍳 BREAKFAST: 4 Eggs + Oats"},
-    {h: 10, t: "🥤 SHAKE: Protein + Creatine"},
-    {h: 12, t: "🥩 LUNCH: Beef & Rice"},
-    {h: 16, t: "🏋️ WORKOUT: High Tension Lift"},
-    {h: 18, t: "🍌 POST: Protein & Banana"},
-    {h: 20, t: "🍗 DINNER: Chicken & Potato"},
-    {h: 22, t: "💤 RECOVERY: Deep Sleep"}
+    {h: 7, t: "🍳 4 Eggs + Oats (Leucine Spike)"},
+    {h: 10, t: "🥤 Protein + Creatine (Nitrogen Fix)"},
+    {h: 12, t: "🥩 Beef & Rice (Glycogen Load)"},
+    {h: 16, t: "🏋️ TIME UNDER TENSION LIFT"},
+    {h: 18, t: "🍌 Protein + Banana (Insulin Drive)"},
+    {h: 20, t: "🍗 Chicken + Potato (Repair)"},
+    {h: 22, t: "💤 Blackout Sleep (Growth Hormone)"}
 ];
 
+// --- TENSION TIMER LOGIC ---
+let timerInterval;
+let seconds = 0;
+
+function startTension() {
+    clearInterval(timerInterval);
+    seconds = 0;
+    document.getElementById('timer-display').style.color = "#00ff88";
+    timerInterval = setInterval(() => {
+        seconds++;
+        document.getElementById('timer-display').innerText = seconds + "s";
+        if (seconds >= 40) document.getElementById('timer-display').style.color = "#ff9f43";
+    }, 1000);
+}
+
+function stopTension() {
+    clearInterval(timerInterval);
+}
+
+// --- CLOCK ENGINE ---
 function updateClock() {
     const now = new Date();
     document.getElementById('clock').innerText = now.toLocaleTimeString();
@@ -15,10 +35,9 @@ function updateClock() {
     const task = schedule.find(s => hour < s.h) || schedule[schedule.length-1];
     document.getElementById('current-task').innerText = task.t;
 }
-
 setInterval(updateClock, 1000);
 
-// Photo Preview
+// --- PHOTO & LOGGING ---
 document.getElementById('photo-upload').addEventListener('change', function(e) {
     const reader = new FileReader();
     reader.onload = function() {
@@ -30,11 +49,13 @@ document.getElementById('photo-upload').addEventListener('change', function(e) {
     reader.readAsDataURL(e.target.files[0]);
 });
 
-// Add to Log
 document.getElementById('master-add').addEventListener('click', () => {
     const name = document.getElementById('entry-name').value;
+    const val1 = document.getElementById('entry-val1').value;
+    const val2 = document.getElementById('entry-val2').value;
     const li = document.createElement('li');
-    li.innerText = `${new Date().toLocaleTimeString()}: ${name}`;
+    li.innerHTML = `<strong>${name}</strong>: ${val1} sets / ${val2} reps / ${seconds}s Tension`;
     document.getElementById('activity-log').prepend(li);
-    document.getElementById('entry-name').value = '';
+    stopTension();
+    document.getElementById('timer-display').innerText = "0s";
 });
