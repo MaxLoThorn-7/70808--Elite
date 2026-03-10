@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>70808 ELITE COMMAND</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-card">
+        <header>
+            <h1>70808 <span class="neon">ELITE</span></h1>
+            <p id="clock"></p>
+        </header>
+
+        <section class="card photo-section">
+            <label for="photo-upload" class="photo-btn">📸 LOG PROGRESS PHOTO</label>
+            <input type="file" id="photo-upload" accept="image/*" style="display:none">
+            <div id="photo-preview"></div>
+        </section>
+
+        <section class="card schedule">
+            <h3>🕒 ANABOLIC CLOCK</h3>
+            <div id="current-task" class="highlight-task">Loading Protocol...</div>
+        </section>
+
+        <section class="card inputs">
+            <input type="text" id="entry-name" placeholder="Food or Exercise">
+            <div class="row">
+                <input type="number" id="entry-val1" placeholder="Cals/Sets">
+                <input type="number" id="entry-val2" placeholder="Prot/Reps">
+            </div>
+            <button id="master-add">COMMIT TO GROWTH</button>
+        </section>
+
+        <ul id="activity-log"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
