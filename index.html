@@ -13,6 +13,15 @@
             <p id="clock"></p>
         </header>
 
+      <section class="card timer-box">
+            <h3>⏱️ TENSION TIMER (Target: 40s)</h3>
+            <div id="timer-display" style="font-size: 3rem; text-align: center; font-weight: bold;">0s</div>
+            <div class="row">
+                <button onclick="startTension()" style="background: #222; color: var(--neon); border: 1px solid var(--neon);">START SET</button>
+                <button onclick="stopTension()" style="background: #444;">PAUSE</button>
+            </div>
+        </section>
+
         <section class="card photo-section">
             <label for="photo-upload" class="photo-btn">📸 LOG PROGRESS PHOTO</label>
             <input type="file" id="photo-upload" accept="image/*" style="display:none">
